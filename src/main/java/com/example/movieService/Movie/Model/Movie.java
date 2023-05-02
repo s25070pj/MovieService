@@ -12,7 +12,18 @@ public class Movie {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.description = "";
+        this.releaseYear = 0;
     }
+
+    public Movie() {
+        this.id = 0;
+        this.name = "";
+        this.category = "";
+        this.description = "";
+        this.releaseYear = 0;
+    }
+
 
     public int getId() {
         return id;
