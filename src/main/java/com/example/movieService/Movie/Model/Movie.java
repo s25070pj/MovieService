@@ -1,6 +1,5 @@
 package com.example.movieService.Movie.Model;
 
-import com.sun.jdi.event.StepEvent;
 
 public class Movie {
     private int id;
