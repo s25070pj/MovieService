@@ -35,6 +35,35 @@ public class MovieService {
         movies.add(movie);
     }
 
+    public void updateMovie(Movie movieWithUpdatedData){
+        Movie movieInBase = getMovieById(movieWithUpdatedData.getId());
+        if(movieInBase != null){
+            if(movieWithUpdatedData.getName() != null){
+                movieInBase.setName(movieWithUpdatedData.getName());
+            }
+            if(movieWithUpdatedData.getCategory() != null){
+                movieInBase.setCategory(movieWithUpdatedData.getCategory());
+            }
+            if(movieWithUpdatedData.getDescription() != null){
+                movieInBase.setDescription(movieWithUpdatedData.getDescription());
+            }
+            if (movieWithUpdatedData.getReleaseYear() >= 1888){
+                movieInBase.setReleaseYear(movieWithUpdatedData.getReleaseYear());
+            }else{
+                throw new IllegalArgumentException("Zły rok wydania, pierwszy film powstał w 1888roku");
+            }
+        }else {
+            throw new IllegalArgumentException("Nie udało sie zaktualizować, film o id " + movieWithUpdatedData.getId() + " nie został odnaleziony w bazie");
+        }
+    }
 
+    public void deleteMovie(int id){
+        Movie movieToDelete = getMovieById(id);
+        if (movieToDelete != null){
+            movies.remove(movieToDelete);
+        }else {
+            throw new IllegalArgumentException("Nie udało się usunąć, film o id " + id + " nie został odnaleziony w bazie");
+        }
+    }
 
 }
