@@ -47,5 +47,25 @@ public class MovieController {
         }
     }
 
+    @PutMapping("/movies/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
+        if (getMovieById(id) != null) {
+            movie.setId(id);
+            movieService.updateMovie(movie);
+            return ResponseEntity.ok(movie);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping("/movies/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable int id) {
+        if(getMovieById(id) != null){
+            movieService.deleteMovie(id);
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
