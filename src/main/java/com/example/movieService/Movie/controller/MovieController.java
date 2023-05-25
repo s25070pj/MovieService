@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/app")
@@ -29,13 +30,15 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
-        if (movieService.getMovieById(id) != null) {
-            return ResponseEntity.ok(movieService.getMovieById(id));
+    public ResponseEntity<Movie> findById(@PathVariable Long id) {
+        Optional<Movie> movie = movieService.findById(id);
+        if (movie.isPresent()) {
+            return ResponseEntity.ok(movie.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @PostMapping("/movies")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
@@ -48,19 +51,28 @@ public class MovieController {
     }
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
-        if (getMovieById(id) != null) {
-            movie.setId(id);
-            movieService.updateMovie(movie);
-            return ResponseEntity.ok(movie);
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        if (findById(id) != null) {
+            movieService.updateMovie(id, movie);
+            return ResponseEntity.ok(findById(id).getBody());
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
+    @PutMapping("/movies/change/{id}")
+    public ResponseEntity<Movie> updateAvailableStatus(@PathVariable Long id, @RequestBody boolean status){
+        if (findById(id) != null){
+            movieService.updateAvailableStatus(id, status);
+            return ResponseEntity.ok(findById(id).getBody());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable int id) {
-        if(getMovieById(id) != null){
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
+        if(findById(id) != null){
             movieService.deleteMovie(id);
             return ResponseEntity.noContent().build();
         }else{

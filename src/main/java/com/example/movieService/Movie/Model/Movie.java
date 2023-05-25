@@ -1,51 +1,40 @@
 package com.example.movieService.Movie.Model;
 
 
+import jakarta.persistence.*;
+
+@Entity
+
 public class Movie {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String category;
     private String description;
     private int releaseYear;
+    @Column(nullable = false)
+    private boolean isAvailable = false;
 
-    public Movie(int id, String name, String category) {
-        this.id = id;
+
+    public Movie(String name, String category) {
         this.name = name;
         this.category = category;
         this.description = "";
         this.releaseYear = 0;
+        this.isAvailable = false;
     }
 
+
     public Movie() {
-        this.id = 0;
         this.name = "";
         this.category = "";
         this.description = "";
         this.releaseYear = 0;
+        this.isAvailable = false;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
-    public int getReleaseYear(){
-        return releaseYear;
-    }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,5 +52,33 @@ public class Movie {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 }
