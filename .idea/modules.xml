@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/JazMocroServices.iml" filepath="$PROJECT_DIR$/.idea/JazMocroServices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RentalService/RentalService.iml" filepath="$PROJECT_DIR$/RentalService/RentalService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MovieService/movieService.iml" filepath="$PROJECT_DIR$/MovieService/movieService.iml" />
+    </modules>
+  </component>
+</project>
