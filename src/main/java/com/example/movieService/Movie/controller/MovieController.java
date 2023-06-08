@@ -54,7 +54,7 @@ public class MovieController {
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         if (findById(id) != null) {
             movieService.updateMovie(id, movie);
-            return ResponseEntity.ok(findById(id).getBody());
+            return ResponseEntity.ok(movie);
         } else {
             return ResponseEntity.badRequest().build();
         }

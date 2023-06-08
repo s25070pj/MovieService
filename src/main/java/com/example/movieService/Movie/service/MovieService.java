@@ -17,7 +17,7 @@ public class MovieService {
     }
 
     public void addMovie(Movie movie) {
-         movieRepository.addMovie(movie);
+         movieRepository.save(movie);
     }
 
     public Optional<Movie> findById(Long id) {
@@ -25,7 +25,7 @@ public class MovieService {
     }
 
     public List<Movie> getAllMovies() {
-        return movieRepository.findAllMovies();
+        return movieRepository.findAll();
     }
 
     public void updateMovie(Long id, Movie movie) {
@@ -45,7 +45,7 @@ public class MovieService {
         if (movie.isAvailable()) {
             existingMovie.setAvailable(movie.isAvailable());
         }
-         movieRepository.updateMovie(id, existingMovie);
+         movieRepository.save(movie);
     }
 
     public void updateAvailableStatus(Long id, boolean status){
@@ -53,6 +53,6 @@ public class MovieService {
     }
 
     public void deleteMovie(Long id) {
-        movieRepository.deleteMovie(id);
+        movieRepository.deleteById(id);
     }
 }
